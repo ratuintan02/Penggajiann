@@ -1,0 +1,111 @@
+/* Navigasi */
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    background: #f8d0e4; /* Warna pink muda pastel */
+    padding: 15px;
+    border-radius: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+nav ul li {
+    margin: 0 20px;
+}
+
+nav ul li a {
+    color: #fff; /* Warna putih untuk teks */
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px 20px;
+    background: #ff85c0; /* Warna pink cerah */
+    border-radius: 50px;
+    transition: 0.3s ease;
+    text-transform: uppercase;
+}
+
+nav ul li a:hover {
+    background: #f72c77; /* Warna pink sedikit lebih gelap */
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+    text-decoration: underline;
+}
+
+/* Form Container */
+.form-container {
+    width: 90%;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background: #fff0f6; /* Warna pink pastel lembut */
+    border-radius: 20px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #ff6fa2; /* Pink cerah untuk heading */
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+form label {
+    display: block;
+    margin: 15px 0 8px;
+    font-weight: 600;
+    color: #ff6fa2; /* Pink cerah */
+}
+
+form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 18px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    background: #fff;
+    transition: border 0.3s ease;
+}
+
+form input:focus {
+    border-color: #ff85c0; /* Warna pink cerah saat fokus */
+    outline: none;
+}
+
+button {
+    width: 100%;
+    background: #ff85c0; /* Warna pink cerah */
+    color: #fff;
+    padding: 12px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background: #f72c77; /* Warna pink lebih gelap */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Hasil Gaji */
+#hasilGaji {
+    margin-top: 30px;
+    background: #ffe4e1; /* Pink muda lembut */
+    padding: 15px;
+    border-radius: 10px;
+    text-align: left;
+    border: 1px solid #ff85c0; /* Warna pink cerah */
+}
+
+#hasilGaji p {
+    font-size: 20px;
+    margin: 12px 0;
+    color: #f72c77; /* Pink gelap untuk teks hasil */
+    font-weight: 600;
+}

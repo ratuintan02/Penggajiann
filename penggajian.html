@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Penggajian</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Form Penggajian Guru</h1>
+        <form id="gajiForm" onsubmit="prosesGaji(event)">
+            <label for="idGuru">ID Guru:</label>
+            <input type="text" id="idGuru" placeholder="Masukkan ID Guru" required>
+
+            <label for="namaGuru">Nama Guru:</label>
+            <input type="text" id="namaGuru" placeholder="Masukkan Nama Guru" required>
+            
+            <label for="jabatan">Jabatan:</label>
+            <input type="text" id="jabatan" placeholder="Masukkan Jabatan" required>
+
+            <label for="gajiPokok">Gaji Pokok (Rp):</label>
+            <input type="text" id="gajiPokok" placeholder="0" oninput="formatRupiahInput(this)" required>
+            
+            <label for="tunjanganAnak">Tunjangan Anak (Rp):</label>
+            <input type="text" id="tunjanganAnak" placeholder="0" oninput="formatRupiahInput(this)" required>
+            
+            <label for="tunjanganPasangan">Tunjangan Pasangan (Rp):</label>
+            <input type="text" id="tunjanganPasangan" placeholder="0" oninput="formatRupiahInput(this)" required>
+            
+            <label for="tunjanganJabatan">Tunjangan Jabatan (Rp):</label>
+            <input type="text" id="tunjanganJabatan" placeholder="0" oninput="formatRupiahInput(this)" required>
+            
+            <label for="asuransiKesehatan">Asuransi Kesehatan (Rp):</label>
+            <input type="text" id="asuransiKesehatan" placeholder="0" oninput="formatRupiahInput(this)" required>
+            
+            <label for="asuransiKematian">Asuransi Kematian (Rp):</label>
+            <input type="text" id="asuransiKematian" placeholder="0" oninput="formatRupiahInput(this)" required>
+            
+
+            <button type="submit">Hitung dan Simpan</button>
+        </form>
+
+        <h2>Hasil Perhitungan</h2>
+        <div id="hasilGaji" style="display: none;">
+            <p><strong>ID Guru:</strong> <span id="outputIdGuru"></span></p>
+            <p><strong>Nama Guru:</strong> <span id="outputNamaGuru"></span></p>
+            <p><strong>Jabatan:</strong> <span id="outputJabatan"></span></p>
+            <p><strong>Gaji Pokok:</strong> <span id="outputGajiPokok"></span></p>
+            <p><strong>Tunjangan Anak:</strong> <span id="outputTunjanganAnak"></span></p>
+            <p><strong>Tunjangan Pasangan:</strong> <span id="outputTunjanganPasangan"></span></p>
+            <p><strong>Tunjangan Jabatan:</strong> <span id="outputTunjanganJabatan"></span></p>
+            <p><strong>Asuransi Kesehatan:</strong> <span id="outputAsuransiKesehatan"></span></p>
+            <p><strong>Asuransi Kematian:</strong> <span id="outputAsuransiKematian"></span></p>
+            <p><strong>Total Gaji:</strong> <span id="outputTotalGaji"></span></p>
+            <p><strong>Gaji Bersih:</strong> <span id="outputGajiBersih"></span></p>
+        </div>
+        
+    </div>
+
+    <script>
+        // Fungsi untuk memformat input menjadi Rupiah secara langsung
+        function formatRupiahInput(input) {
+            let value = input.value.replace(/[^0-9]/g, ""); // Menghapus karakter selain angka
+            if (value) {
+                input.value = new Intl.NumberFormat("id-ID", {
+                    style: "currency",
+                    currency: "IDR",
+                    minimumFractionDigits: 0
+                }).format(value);
+            } else {
+                input.value = "";
+            }
+        }
+
+        // Fungsi untuk membersihkan format Rupiah dan mengembalikan nilai angka
+        function cleanNumber(input) {
+            return parseFloat(input.value.replace(/[^0-9]/g, "")) || 0;
+        }
+
+        // Format angka menjadi Rupiah
+        function formatRupiah(number) {
+            return new Intl.NumberFormat("id-ID", {
+                style: "currency",
+                currency: "IDR",
+                minimumFractionDigits: 0
+            }).format(number);
+        }
+
+        // Fungsi untuk memproses gaji dan menampilkan hasil
+        function prosesGaji(event) {
+            event.preventDefault();
+
+            // Ambil dan bersihkan data dari form
+            const idGuru = document.getElementById('idGuru').value;
+            const namaGuru = document.getElementById('namaGuru').value;
+            const jabatan = document.getElementById('jabatan').value;
+            const gajiPokok = cleanNumber(document.getElementById('gajiPokok'));
+            const tunjanganAnak = cleanNumber(document.getElementById('tunjanganAnak'));
+            const tunjanganPasangan = cleanNumber(document.getElementById('tunjanganPasangan'));
+            const tunjanganJabatan = cleanNumber(document.getElementById('tunjanganJabatan'));
+            const asuransiKesehatan = cleanNumber(document.getElementById('asuransiKesehatan'));
+            const asuransiKematian = cleanNumber(document.getElementById('asuransiKematian'));
+
+            // Hitung total gaji dan gaji bersih
+            const totalGaji = gajiPokok + tunjanganAnak + tunjanganPasangan + tunjanganJabatan;
+            const gajiBersih = totalGaji - asuransiKesehatan - asuransiKematian;
+
+            // Tampilkan hasil di form
+            document.getElementById('outputIdGuru').innerText = idGuru;
+            document.getElementById('outputNamaGuru').innerText = namaGuru;
+            document.getElementById('outputJabatan').innerText = jabatan;
+            document.getElementById('outputGajiPokok').innerText = formatRupiah(gajiPokok);
+            document.getElementById('outputTunjanganAnak').innerText = formatRupiah(tunjanganAnak);
+            document.getElementById('outputTunjanganPasangan').innerText = formatRupiah(tunjanganPasangan);
+            document.getElementById('outputTunjanganJabatan').innerText = formatRupiah(tunjanganJabatan);
+            document.getElementById('outputAsuransiKesehatan').innerText = formatRupiah(asuransiKesehatan);
+            document.getElementById('outputAsuransiKematian').innerText = formatRupiah(asuransiKematian);
+            document.getElementById('outputTotalGaji').innerText = formatRupiah(totalGaji);
+            document.getElementById('outputGajiBersih').innerText = formatRupiah(gajiBersih);
+
+            // Tampilkan div hasil
+            document.getElementById('hasilGaji').style.display = 'block';
+
+            alert("Data gaji berhasil dihitung!");
+        }
+
+    </script>
+</body>
+</html>
